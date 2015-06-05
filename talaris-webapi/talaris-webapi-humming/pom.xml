@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>me.ele</groupId>
+		<artifactId>talaris-webapi</artifactId>
+		<version>1.0.6-SNAPSHOT</version>
+	</parent>
+	<artifactId>talaris-webapi-humming</artifactId>
+	<name>talaris-webapi-humming</name>
+	<packaging>war</packaging>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-base-model</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-crowd-retailer</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-session</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-hermes</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-napos-channel</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-delivery-order</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-notice</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<!-- Add Talaris Impl here -->
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-base-model-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-session-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-hermes-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-napos-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-crowd-retailer-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-delivery-order-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-notice-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<!-- -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+
+		</plugins>
+		<!--去除*.properties eric_shao -->
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**/*.properties</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
+</project>

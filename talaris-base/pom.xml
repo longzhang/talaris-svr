@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>me.ele</groupId>
+	<artifactId>talaris-base</artifactId>
+	<name>talaris-base</name>
+	<version>1.0.6-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<properties>
+		<java-version>1.7</java-version>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- validation-api -->
+		<validation-api.version>1.1.0.Final</validation-api.version>
+
+		<!-- Talaris -->
+		<talaris.version>1.0.6-SNAPSHOT</talaris.version>
+		<!-- Jackson -->
+		<jackson.version>1.9.10</jackson.version>
+
+	</properties>
+	<modules>
+		<module>talaris-base-model</module>
+		<module>talaris-crowd-user</module>
+		<module>talaris-crowd-retailer</module>
+		<module>talaris-session</module>
+		<module>talaris-delivery-order</module>
+		<module>talaris-express</module>
+		<module>talaris-ubt</module>
+		<module>talaris-notice</module>
+		<module>../talaris-util</module>
+		<module>../talaris-impl</module>
+		<module>../talaris-external/talaris-eleme</module>
+		<module>../talaris-external/talaris-hermes</module>
+		<module>../talaris-external/talaris-napos-channel</module>
+	</modules>
+	<dependencies>
+
+		<!-- Validation -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${validation-api.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<!--上传maven私服以及maven插件 -->
+	<distributionManagement>
+		<repository>
+			<id>ele-bpm-release</id>
+			<url>http://maven.dev.elenet.me/nexus/content/repositories/ele-bpm-release/</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>ele-bpm-snapshots</id>
+			<url>http://maven.dev.elenet.me/nexus/content/repositories/ele-bpm-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<!-- 源码插件 -->
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- javadoc 插件 -->
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- explicitly define maven-deploy-plugin after other to force exec 
+					order -->
+				<artifactId>maven-deploy-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<!--去除*.properties eric_shao -->
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**/*.properties</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
+</project>

@@ -1,0 +1,811 @@
+<HTML>
+<HEAD>
+
+<META NAME="Generator" CONTENT="Quadralay WebWorks Publisher 3.5.0">
+<META NAME="NewFiles" CONTENT="DefaultIntermediate">
+<META NAME="Title" CONTENT=" Basic Features ">
+
+<TITLE> Basic Features </TITLE>
+
+</HEAD>
+
+<BODY BGCOLOR="#ffffff">
+
+<A NAME="top"></A>
+
+<TABLE CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP"><FONT FACE="Helvetica,Arial,sans-serif" COLOR="#00008B"><B>Oracle8<i>i</i> JDBC Developer's Guide and Reference<BR>Release 3 (8.1.7)</B><BR>Part Number A83724-01</FONT></TD>
+ 
+
+<TD VALIGN="BOTTOM" ALIGN="RIGHT">
+<TABLE CELLSPACING="0" CELLPADDING="0">
+<TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="25%"><A HREF="../../products.htm"><IMG SRC="../../dcommon/gifs/prodicon.gif" ALT="" BORDER="0" HEIGHT="30" WIDTH="30"><BR>
+<FONT SIZE="-2">Library</FONT></A></TD>
+
+
+
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="25%"><A HREF="../index.htm"><IMG SRC="../../dcommon/gifs/bookicon.gif" ALT="" BORDER="0" HEIGHT="30" WIDTH="30"><BR>
+<FONT SIZE="-2">Solution Area</FONT></A></TD>
+
+
+
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="25%"><A HREF="toc.htm"><IMG SRC="../../dcommon/gifs/conticon.gif" ALT="" BORDER="0" HEIGHT="30"
+WIDTH="30"><BR>
+<FONT SIZE="-2">Contents</FONT></A></TD>
+
+
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="25%"><A HREF="index.htm"><IMG SRC="../../dcommon/gifs/indxicon.gif" ALT="" BORDER="0" HEIGHT="30"
+WIDTH="30"><BR>
+<FONT SIZE="-2">Index</FONT></A></TD>
+
+</TR>
+</TABLE>
+</TD>
+</TR>
+
+</TABLE>
+
+
+<HR>
+
+<P>
+<A HREF="basic2.htm"><IMG SRC="../../dcommon/gifs/larrow.gif" ALT="Go to previous page" BORDER="0" HEIGHT="30" WIDTH="40"></A>
+<A HREF="basic.htm"><IMG SRC="../../dcommon/gifs/uarrow.gif" ALT="Go to beginning of chapter" BORDER="0" HEIGHT="30" WIDTH="40"></A>
+<A HREF="basic4.htm"><IMG SRC="../../dcommon/gifs/rarrow.gif" ALT="Go to next page" BORDER="0" HEIGHT="30" WIDTH="40"></A>
+
+
+
+
+
+
+<DIV CLASS="IND">
+
+<!-- End Header -->
+
+
+<A NAME="1001613"></A>
+<!--TOC=h1-"1001613"-->
+<H2 CLASS="H1"><FONT FACE="Arial, Helvetica, sans-serif" COLOR="#330099"> Datatype Mappings</FONT></H2>
+<!--/TOC=h1-->
+
+<A NAME="1022588"></A>
+<P CLASS="BP">
+The Oracle JDBC drivers support standard JDBC 1.0 and 2.0 types as well as Oracle-specific <CODE>BFILE</CODE> and <CODE>ROWID</CODE> datatypes and types of the <CODE>REF CURSOR</CODE> category. 
+</P>
+
+<A NAME="1022589"></A>
+<P CLASS="BP">
+This section documents standard and Oracle-specific SQL-Java default type mappings.
+</P>
+
+<A NAME="1022590"></A>
+<!--TOC=h2-"1022590"-->
+<H3 CLASS="H2"><FONT FACE="Arial, Helvetica, sans-serif" COLOR="#330099"> Table of Mappings</FONT></H3>
+<!--/TOC=h2-->
+
+<A NAME="1022158"></A>
+<P CLASS="BP">
+For reference, <a href="basic3.htm#1021193">Table &#32;3-2</A> shows the default mappings between SQL datatypes, JDBC typecodes, standard Java types, and Oracle extended types. 
+</P>
+
+<A NAME="1021508"></A>
+<P CLASS="BP">
+The <STRONG CLASS="Bold">SQL Datatypes</STRONG> column lists the SQL types that exist in the database.
+</P>
+
+<A NAME="1010551"></A>
+<P CLASS="BP">
+The <STRONG CLASS="Bold">JDBC Typecodes</STRONG> column lists data typecodes supported by the JDBC standard and defined in the <CODE>java.sql.Types</CODE> class, or by Oracle in the <CODE>oracle.jdbc.driver.OracleTypes</CODE> class. For standard typecodes, the codes are identical in these two classes.
+</P>
+
+<A NAME="1010117"></A>
+<P CLASS="BP">
+The <STRONG CLASS="Bold">Standard Java Types</STRONG> column lists standard types defined in the Java language.
+</P>
+
+<A NAME="1010118"></A>
+<P CLASS="BP">
+The <STRONG CLASS="Bold">Oracle Extension Java Types</STRONG> column lists the <CODE>oracle.sql.*</CODE> Java types that correspond to each SQL datatype in the database. These are Oracle extensions that let you retrieve all SQL data in the form of a <CODE>oracle.sql.*</CODE> Java type. Mapping SQL datatypes into the <CODE>oracle.sql</CODE> datatypes lets you store and retrieve data without losing information. Refer to <a href="oraint3.htm#1003922">"Package oracle.sql"</A><a href="oraint3.htm#1003922"></A> for more information on the <CODE>oracle.sql.*</CODE> package.
+</P>
+   
+<A NAME="1010289">
+
+<H5 CLASS="FormalW"><FONT FACE="Helvetica,Arial,sans-serif"><EM>
+<A NAME="1021193"></A>
+<STRONG><FONT FACE="Arial, Helvetica, sans-serif"><EM>Table 3-2 &#32;Default Mappings Between SQL Types and Java Types  &#32;</EM></FONT></STRONG>
+ </EM></FONT></H5>
+
+<TABLE CLASS="FormalW" BORDER="1" FRAME="HSIDES" RULES="ROWS" WIDTH="100%" CELLPADDING="3" CELLSPACING="0">
+<THEAD>
+<TR CLASS="FormalW"><TH CLASS="FormalW" align="left" valign="bottom">
+<A NAME="1021201"></A>
+<FONT FACE="Arial, Helvetica, sans-serif"><STRONG>SQL Datatypes</STRONG></FONT>&nbsp;</TH>
+<TH CLASS="FormalW" align="left" valign="bottom">
+<A NAME="1021203"></A>
+<FONT FACE="Arial, Helvetica, sans-serif"><STRONG> JDBC Typecodes</STRONG></FONT>&nbsp;</TH>
+<TH CLASS="FormalW" align="left" valign="bottom">
+<A NAME="1021205"></A>
+<FONT FACE="Arial, Helvetica, sans-serif"><STRONG>Standard Java Types</STRONG></FONT>&nbsp;</TH>
+<TH CLASS="FormalW" align="left" valign="bottom">
+<A NAME="1021207"></A>
+<FONT FACE="Arial, Helvetica, sans-serif"><STRONG>Oracle Extension Java Types</STRONG></FONT>&nbsp;</TH>
+</TR>
+<TBODY>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021209"></A>
+<P CLASS="TB">
+ &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021211"></A>
+<P CLASS="TB">
+<STRONG CLASS="Bold">STANDARD JDBC 1.0 TYPES</STRONG>: &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021213"></A>
+<P CLASS="TB">
+ &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021215"></A>
+<P CLASS="TB">
+ &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021217"></A>
+<P CLASS="TB">
+CHAR &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021219"></A>
+<P CLASS="TB">
+java.sql.Types.CHAR &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021221"></A>
+<P CLASS="TB">
+java.lang.String &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021223"></A>
+<P CLASS="TB">
+oracle.sql.CHAR &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021225"></A>
+<P CLASS="TB">
+VARCHAR2 &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021227"></A>
+<P CLASS="TB">
+java.sql.Types.VARCHAR &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021229"></A>
+<P CLASS="TB">
+java.lang.String &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021231"></A>
+<P CLASS="TB">
+oracle.sql.CHAR &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021233"></A>
+<P CLASS="TB">
+LONG &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021235"></A>
+<P CLASS="TB">
+java.sql.Types.LONGVARCHAR &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021237"></A>
+<P CLASS="TB">
+java.lang.String &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021239"></A>
+<P CLASS="TB">
+oracle.sql.CHAR &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021241"></A>
+<P CLASS="TB">
+NUMBER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021243"></A>
+<P CLASS="TB">
+java.sql.Types.NUMERIC &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021245"></A>
+<P CLASS="TB">
+java.math.BigDecimal &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021247"></A>
+<P CLASS="TB">
+oracle.sql.NUMBER &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021249"></A>
+<P CLASS="TB">
+NUMBER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021251"></A>
+<P CLASS="TB">
+java.sql.Types.DECIMAL &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021253"></A>
+<P CLASS="TB">
+java.math.BigDecimal &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021255"></A>
+<P CLASS="TB">
+oracle.sql.NUMBER &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021257"></A>
+<P CLASS="TB">
+NUMBER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021259"></A>
+<P CLASS="TB">
+java.sql.Types.BIT &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021261"></A>
+<P CLASS="TB">
+boolean &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021263"></A>
+<P CLASS="TB">
+oracle.sql.NUMBER &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021265"></A>
+<P CLASS="TB">
+NUMBER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021267"></A>
+<P CLASS="TB">
+java.sql.Types.TINYINT &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021269"></A>
+<P CLASS="TB">
+byte &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021271"></A>
+<P CLASS="TB">
+oracle.sql.NUMBER &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021273"></A>
+<P CLASS="TB">
+NUMBER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021275"></A>
+<P CLASS="TB">
+java.sql.Types.SMALLINT &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021277"></A>
+<P CLASS="TB">
+short &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021279"></A>
+<P CLASS="TB">
+oracle.sql.NUMBER &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021281"></A>
+<P CLASS="TB">
+NUMBER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021283"></A>
+<P CLASS="TB">
+java.sql.Types.INTEGER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021285"></A>
+<P CLASS="TB">
+int &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021287"></A>
+<P CLASS="TB">
+oracle.sql.NUMBER &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021289"></A>
+<P CLASS="TB">
+NUMBER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021291"></A>
+<P CLASS="TB">
+java.sql.Types.BIGINT &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021293"></A>
+<P CLASS="TB">
+long &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021295"></A>
+<P CLASS="TB">
+oracle.sql.NUMBER &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021297"></A>
+<P CLASS="TB">
+NUMBER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021299"></A>
+<P CLASS="TB">
+java.sql.Types.REAL &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021301"></A>
+<P CLASS="TB">
+float &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021303"></A>
+<P CLASS="TB">
+oracle.sql.NUMBER &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021305"></A>
+<P CLASS="TB">
+NUMBER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021307"></A>
+<P CLASS="TB">
+java.sql.Types.FLOAT &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021309"></A>
+<P CLASS="TB">
+double &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021311"></A>
+<P CLASS="TB">
+oracle.sql.NUMBER &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021313"></A>
+<P CLASS="TB">
+NUMBER &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021315"></A>
+<P CLASS="TB">
+java.sql.Types.DOUBLE &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021317"></A>
+<P CLASS="TB">
+double &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021319"></A>
+<P CLASS="TB">
+oracle.sql.NUMBER &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021321"></A>
+<P CLASS="TB">
+RAW &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021323"></A>
+<P CLASS="TB">
+java.sql.Types.BINARY &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021325"></A>
+<P CLASS="TB">
+byte[] &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021327"></A>
+<P CLASS="TB">
+oracle.sql.RAW &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021329"></A>
+<P CLASS="TB">
+RAW &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021331"></A>
+<P CLASS="TB">
+java.sql.Types.VARBINARY &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021333"></A>
+<P CLASS="TB">
+byte[] &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021335"></A>
+<P CLASS="TB">
+oracle.sql.RAW &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021337"></A>
+<P CLASS="TB">
+LONGRAW &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021339"></A>
+<P CLASS="TB">
+java.sql.Types.LONGVARBINARY &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021341"></A>
+<P CLASS="TB">
+byte[] &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021343"></A>
+<P CLASS="TB">
+oracle.sql.RAW &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021345"></A>
+<P CLASS="TB">
+DATE &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021347"></A>
+<P CLASS="TB">
+java.sql.Types.DATE &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021349"></A>
+<P CLASS="TB">
+java.sql.Date &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021351"></A>
+<P CLASS="TB">
+oracle.sql.DATE &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021353"></A>
+<P CLASS="TB">
+DATE &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021355"></A>
+<P CLASS="TB">
+java.sql.Types.TIME &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021357"></A>
+<P CLASS="TB">
+java.sql.Time &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021359"></A>
+<P CLASS="TB">
+oracle.sql.DATE &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021361"></A>
+<P CLASS="TB">
+DATE &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021363"></A>
+<P CLASS="TB">
+java.sql.Types.TIMESTAMP &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021365"></A>
+<P CLASS="TB">
+javal.sql.Timestamp &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021367"></A>
+<P CLASS="TB">
+oracle.sql.DATE &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021377"></A>
+<P CLASS="TB">
+ &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021379"></A>
+<P CLASS="TB">
+<STRONG CLASS="Bold">STANDARD JDBC 2.0 TYPES</STRONG>: &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021381"></A>
+<P CLASS="TB">
+ &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021383"></A>
+<P CLASS="TB">
+ &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021385"></A>
+<P CLASS="TB">
+BLOB &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021387"></A>
+<P CLASS="TB">
+java.sql.Types.BLOB &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021389"></A>
+<P CLASS="TB">
+java.sql.Blob &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021391"></A>
+<P CLASS="TB">
+oracle.sql.BLOB &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021393"></A>
+<P CLASS="TB">
+CLOB &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021395"></A>
+<P CLASS="TB">
+java.sql.Types.CLOB &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021397"></A>
+<P CLASS="TB">
+java.sql.Clob &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021399"></A>
+<P CLASS="TB">
+oracle.sql.CLOB &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021401"></A>
+<P CLASS="TB">
+user-defined object &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021403"></A>
+<P CLASS="TB">
+java.sql.Types.STRUCT &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021405"></A>
+<P CLASS="TB">
+java.sql.Struct &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021407"></A>
+<P CLASS="TB">
+oracle.sql.STRUCT &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021409"></A>
+<P CLASS="TB">
+user-defined reference &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021411"></A>
+<P CLASS="TB">
+java.sql.Types.REF &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021413"></A>
+<P CLASS="TB">
+java.sql.Ref &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021415"></A>
+<P CLASS="TB">
+oracle.sql.REF &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021417"></A>
+<P CLASS="TB">
+user-defined collection &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021419"></A>
+<P CLASS="TB">
+java.sql.Types.ARRAY &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021421"></A>
+<P CLASS="TB">
+java.sql.Array &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021423"></A>
+<P CLASS="TB">
+oracle.sql.ARRAY &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021425"></A>
+<P CLASS="TB">
+ &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021427"></A>
+<P CLASS="TB">
+<STRONG CLASS="Bold">ORACLE EXTENSIONS</STRONG>: &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021429"></A>
+<P CLASS="TB">
+ &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021431"></A>
+<P CLASS="TB">
+ &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021433"></A>
+<P CLASS="TB">
+BFILE &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021435"></A>
+<P CLASS="TB">
+oracle.jdbc.driver.OracleTypes.BFILE &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021437"></A>
+<P CLASS="TB">
+n/a &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021439"></A>
+<P CLASS="TB">
+oracle.sql.BFILE &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021441"></A>
+<P CLASS="TB">
+ROWID &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021443"></A>
+<P CLASS="TB">
+oracle.jdbc.driver.OracleTypes.ROWID &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021445"></A>
+<P CLASS="TB">
+n/a &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021447"></A>
+<P CLASS="TB">
+oracle.sql.ROWID &nbsp;</TD>
+</TR>
+<TR CLASS="FormalW" ALIGN="LEFT" VALIGN="TOP"><TD CLASS="FormalW">
+<A NAME="1021449"></A>
+<P CLASS="TB">
+REF CURSOR type &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021451"></A>
+<P CLASS="TB">
+oracle.jdbc.driver.OracleTypes.CURSOR &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021453"></A>
+<P CLASS="TB">
+java.sql.ResultSet &nbsp;</TD>
+<TD CLASS="FormalW">
+<A NAME="1021455"></A>
+<P CLASS="TB">
+oracle.jdbc.driver.OracleResultSet &nbsp;</TD>
+</TR>
+
+</TABLE>
+
+<TABLE CLASS="TableNote" WIDTH="100%" CELLPADDING="3" CELLSPACING="0">
+<TR CLASS="TableNote" ALIGN=LEFT VALIGN=TOP><TD CLASS="TableNote">
+
+</TD></TR>
+</TABLE>
+
+</A>
+
+<A NAME="1021571">
+<DIV ALIGN="CENTER">
+<P>
+<TABLE CLASS="Note" BORDER="0" WIDTH="80%" CELLPADDING="0" CELLSPACING="0">
+<TR CLASS="Note"><TD CLASS="Note">
+<HR>
+<A NAME="1021654"></A><FONT FACE="Arial, Helvetica, sans-serif"><STRONG CLASS="NH">Note:</STRONG></FONT>
+
+<A NAME="1021655"></A>
+<P CLASS="NB">
+Under JDK 1.1.x, the Oracle package <CODE>oracle.jdbc2</CODE> is required to support JDBC 2.0 types. (Under JDK 1.2.x they are supported by the standard <CODE>javal.sql</CODE> package.) &nbsp;
+<HR>
+</TD>
+</TR>
+
+</TABLE>
+
+<TABLE CLASS="TableNote" CELLPADDING="3" >
+<TR CLASS="TableNote" ALIGN=LEFT VALIGN=TOP><TD CLASS="TableNote">
+
+</TD></TR>
+</TABLE>
+</DIV>
+</A>
+   
+<A NAME="1021651"></A>
+<P CLASS="BP">
+For a list of all the Java datatypes to which you can validly map a SQL datatype, see <a href="ref1.htm#1000969">"Valid SQL-JDBC Datatype Mappings"</A><a href="ref1.htm#1000969"></A>.
+</P>
+
+<A NAME="1021581"></A>
+<P CLASS="BP">
+See <a href="oraint.htm#1000888">Chapter &#32;6, "Overview of Oracle Extensions"</A>, for more information on type mappings. In <a href="oraint.htm#1000888">Chapter &#32;6</A> you can also find more information on the following:
+</P>
+
+<UL CLASS="LB1">
+
+<LI CLASS="LB1" TYPE="DISC"><A NAME="1021585"></A>packages <CODE>oracle.sql</CODE>, <CODE>oracle.jdbc.driver</CODE>, and <CODE>oracle.jdbc2</CODE> 
+<P>
+
+<LI CLASS="LB1" TYPE="DISC"><A NAME="1021586"></A>type extensions for the Oracle <CODE>BFILE</CODE> and <CODE>ROWID</CODE> datatypes and user-defined types of the <CODE>REF</CODE> <CODE>CURSOR</CODE> category
+<P>
+</UL>
+
+<A NAME="1022165"></A>
+<!--TOC=h2-"1022165"-->
+<H3 CLASS="H2"><FONT FACE="Arial, Helvetica, sans-serif" COLOR="#330099"> Notes Regarding Mappings</FONT></H3>
+<!--/TOC=h2-->
+
+<A NAME="1022169"></A>
+<P CLASS="BP">
+This section goes into further detail regarding mappings for <CODE>NUMBER</CODE> and user-defined types.
+</P>
+
+<A NAME="1015692"></A>
+<!--TOC=h3-"1015692"-->
+<H4 CLASS="H3"><FONT FACE="Arial, Helvetica, sans-serif" COLOR="#330099"> Regarding User-Defined Types</FONT></H4>
+<!--/TOC=h3-->
+
+<A NAME="1021564"></A>
+<P CLASS="BP">
+User-defined types such as objects, object references, and collections map by default to weak Java types (such as <CODE>java.sql.Struct</CODE>), but alternatively can map to strongly typed <EM CLASS="Italic">custom Java classes</EM>. Custom Java classes can implement one of two interfaces:
+</P>
+
+<UL CLASS="LB1">
+
+<LI CLASS="LB1" TYPE="DISC"><A NAME="1021611"></A>the standard <CODE>java.sql.SQLData</CODE> (for user-defined objects only)
+<P>
+
+<LI CLASS="LB1" TYPE="DISC"><A NAME="1021615"></A>the Oracle-specific <CODE>oracle.sql.CustomDatum</CODE> (primarily for user-defined objects, object references, and collections, but able to map from <EM CLASS="Italic">any</EM> SQL type where you want customized processing of any kind)
+<P>
+</UL>
+
+<A NAME="1021593"></A>
+<P CLASS="BP">
+For information about custom Java classes and the <CODE>SQLData</CODE> and <CODE>CustomDatum</CODE> interfaces, see <a href="oraoot1.htm#1039458">"Mapping Oracle Objects"</A><a href="oraoot1.htm#1039458"></A> and <a href="oraoot3.htm#1039529">"Creating and Using Custom Object Classes for Oracle Objects"</A><a href="oraoot3.htm#1039529"></A>. (Although these sections focus on custom Java classes for user-defined objects, there is some general information about other kinds of custom Java classes as well.)
+</P>
+
+<A NAME="1022187"></A>
+<!--TOC=h3-"1022187"-->
+<H4 CLASS="H3"><FONT FACE="Arial, Helvetica, sans-serif" COLOR="#330099"> Regarding NUMBER Types</FONT></H4>
+<!--/TOC=h3-->
+
+<A NAME="1022198"></A>
+<P CLASS="BP">
+For the different typecodes that an Oracle <CODE>NUMBER</CODE> value can correspond to, call the getter routine that is appropriate for the size of the data for mapping to work properly. For example, call <CODE>getByte()</CODE> to get a Java <CODE>tinyint</CODE> value, for an item <CODE>x</CODE> where -128 &lt; x &lt; 128.
+</P>
+
+
+
+<HR NOSHADE SIZE="1">
+<P CLASS="BP">
+
+
+
+<!-- Start Footer -->
+
+</DIV>
+
+<DIV CLASS="OUTD">
+
+
+<HR>
+
+<TABLE CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
+<TR>
+
+<TD VALIGN="BOTTOM" WIDTH="33%">
+
+<TABLE CELLSPACING="0" CELLPADDING="0">
+<TR>
+<TD ALIGN="CENTER"><A HREF="basic2.htm"><IMG SRC="../../dcommon/gifs/larrow.gif" ALT="Go to previous page" BORDER="0" HEIGHT="30" WIDTH="40"><BR><FONT SIZE="-2"></FONT></A></TD>
+<TD ALIGN="CENTER"><A HREF="basic.htm"><IMG SRC="../../dcommon/gifs/uarrow.gif" ALT="Go to beginning of chapter" BORDER="0" HEIGHT="30" WIDTH="40"><BR><FONT SIZE="-2"></FONT></A></TD>
+<TD ALIGN="CENTER"><A HREF="basic4.htm"><IMG SRC="../../dcommon/gifs/rarrow.gif" ALT="Go to next page" BORDER="0" HEIGHT="30" WIDTH="40"><BR><FONT SIZE="-2"></FONT></A></TD>
+</TR>
+</TABLE>
+
+</TD>
+
+
+<TD ALIGN="CENTER" WIDTH="34%">
+<A HREF="../../dcommon/html/cpyr.htm"><IMG SRC="../../dcommon/gifs/oracle.gif" ALT="Oracle" BORDER="0" ><BR>
+<FONT SIZE="-2">Copyright &copy; 1996-2000, Oracle Corporation.</FONT></A>
+<BR>
+<FONT SIZE="-2">All Rights Reserved.</FONT>
+</TD>
+
+<TD VALIGN="BOTTOM" ALIGN="RIGHT" WIDTH="33%"> 
+
+<TABLE CELLSPACING="0" CELLPADDING="0">
+<TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="25%"><A HREF="../../products.htm"><IMG SRC="../../dcommon/gifs/prodicon.gif" ALT="" BORDER="0" HEIGHT="30" WIDTH="30"><BR>
+<FONT SIZE="-2">Library</FONT></A></TD>
+
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="25%"><A HREF="../index.htm"><IMG SRC="../../dcommon/gifs/bookicon.gif" ALT="" BORDER="0" HEIGHT="30" WIDTH="30"><BR>
+<FONT SIZE="-2">Solution Area</FONT></A></TD>
+
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="25%"><A HREF="toc.htm"><IMG SRC="../../dcommon/gifs/conticon.gif" ALT="" BORDER="0" HEIGHT="30"
+WIDTH="30"><BR>
+<FONT SIZE="-2">Contents</FONT></A></TD>
+
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="25%"><A HREF="index.htm"><IMG SRC="../../dcommon/gifs/indxicon.gif" ALT="" BORDER="0" HEIGHT="30"
+WIDTH="30"><BR>
+<FONT SIZE="-2">Index</FONT></A></TD>
+</TR>
+</TABLE>
+
+</TD>
+
+</TR>
+</TABLE>
+
+</DIV>
+</BODY>
+</HTML>

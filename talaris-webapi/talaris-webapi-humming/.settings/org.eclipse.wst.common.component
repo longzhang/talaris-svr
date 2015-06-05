@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="talaris-webapi-humming">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="talaris-base-model-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-base-model/talaris-base-model">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-crowd-retailer-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-crowd-retailer/talaris-crowd-retailer">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-session-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-session/talaris-session">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-hermes-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-hermes/talaris-hermes">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-napos-channel-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-napos-channel/talaris-napos-channel">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-delivery-order-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-delivery-order/talaris-delivery-order">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-notice-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-notice/talaris-notice">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-base-model-impl-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-base-model-impl/talaris-base-model-impl">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-session-impl-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-session-impl/talaris-session-impl">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-hermes-impl-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-hermes-impl/talaris-hermes-impl">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-napos-impl-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-napos-impl/talaris-napos-impl">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-crowd-retailer-impl-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-crowd-retailer-impl/talaris-crowd-retailer-impl">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-delivery-order-impl-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-delivery-order-impl/talaris-delivery-order-impl">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-notice-impl-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-notice-impl/talaris-notice-impl">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="talaris-util-1.0.6-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/talaris-util/talaris-util">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="talaris-webapi-humming"/>
+        <property name="java-output-path" value="/talaris-webapi-humming/target/classes"/>
+    </wb-module>
+</project-modules>

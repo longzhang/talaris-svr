@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+               http://www.springframework.org/schema/aop   
+               http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+               http://www.springframework.org/schema/tx  
+               http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+               http://www.springframework.org/schema/context  
+               http://www.springframework.org/schema/context/spring-context-3.0.xsd
+               http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<context:component-scan base-package="me.ele.talaris.*" />
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<!--本地环境 -->
+			<!-- <list> <value>classpath:database.properties</value> <value>classpath:hermes.properties</value> 
+				<value>classpath:napos.properties</value> <value>classpath:redis.properties</value> 
+				<value>classpath:msg.properties</value> <value>classpath:bankauth.properties</value> 
+				<value>classpath:config.properties</value> <value>classpath:location.properties</value> 
+				<value>classpath:rstids.properties</value> </list> -->
+
+			<!--开发环境 -->
+			<!-- <list> <value>file:/home/ubuntu/config/properties/dev/database.properties</value> 
+				<value>file:/home/ubuntu/config/properties/dev/hermes.properties</value> 
+				<value>file:/home/ubuntu/config/properties/dev/napos.properties</value> <value>file:/home/ubuntu/config/properties/dev/redis.properties</value> 
+				<value>file:/home/ubuntu/config/properties/dev/msg.properties</value> <value>file:/home/ubuntu/config/properties/dev/bankauth.properties 
+				</value> <value>file:/home/ubuntu/config/properties/dev/config.properties</value> 
+				<value>file:/home/ubuntu/config/properties/dev/location.properties</value> 
+				</list> -->
+
+			<!--测试环境 -->
+
+            <list>
+                <value>file:/home/ubuntu/config/properties/test/database.properties
+                </value>
+                <value>file:/home/ubuntu/config/properties/test/hermes.properties
+                </value>
+                <value>file:/home/ubuntu/config/properties/test/napos.properties
+                </value>
+                <value>file:/home/ubuntu/config/properties/test/redis.properties
+                </value>
+                <value>file:/home/ubuntu/config/properties/test/msg.properties
+                </value>
+                <value>file:/home/ubuntu/config/properties/test/bankauth.properties
+                </value>
+                <value>file:/home/ubuntu/config/properties/test/config.properties
+                </value>
+                <value>file:/home/ubuntu/config/properties/test/rstids.properties
+                </value>
+                <value>file:/home/ubuntu/config/properties/test/location.properties
+                </value>
+            </list>
+			<!--生产环境 -->
+			<!-- <list> <value>file:/home/ubuntu/config/properties/database.properties 
+				</value> <value>file:/home/ubuntu/config/properties/hermes.properties</value> 
+				<value>file:/home/ubuntu/config/properties/napos.properties</value> <value>file:/home/ubuntu/config/properties/redis.properties</value> 
+				<value>file:/home/ubuntu/config/properties/msg.properties</value> <value>file:/home/ubuntu/config/properties/bankauth.properties 
+				</value> <value>file:/home/ubuntu/config/properties/config.properties</value> 
+				<value>file:/home/ubuntu/config/properties/rstids.properties</value> </list> -->
+		</property>
+		<property name="fileEncoding" value="UTF-8" />
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>${db.driver}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${db.url}</value>
+		</property>
+		<property name="user">
+			<value>${db.username}</value>
+		</property>
+		<property name="password">
+			<value>${db.password}</value>
+		</property>
+		<!--连接池中保留的最小连接数。 -->
+		<property name="minPoolSize" value="10" />
+		<!--连接池中保留的最大连接数。Default: 15 -->
+		<property name="maxPoolSize" value="100" />
+		<!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+		<property name="maxIdleTime" value="1800" />
+		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+		<property name="acquireIncrement" value="3" />
+		<property name="maxStatements" value="1000" />
+		<property name="initialPoolSize" value="10" />
+		<!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+		<property name="idleConnectionTestPeriod" value="60" />
+		<!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
+		<property name="acquireRetryAttempts" value="30" />
+		<property name="breakAfterAcquireFailure" value="true" />
+		<property name="testConnectionOnCheckout" value="false" />
+	</bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 事物基于注解，请注意注解默认的隔离性是Isolation.DEFAULT，建议自己设置一下 使用示例：@Transactional(isolation= 
+		Isolation.READ_COMMITTED)。 回滚默认是runtimeException。如果业务方法抛出checked异常，且需要回滚，添加注解里面属性。rollbackfor=excetption 
+		传播性用默认的，无特殊需求直接用默认的，特殊需求自己设置传播性 wen.zheng -->
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- dao层的类 -->
+	<bean id="callTaskInfoDao" class="me.ele.talaris.dao.CallTaskInfoDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="cityDao" class="me.ele.talaris.dao.CityDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="deliveryOrderDao"
+		class="me.ele.talaris.deliveryorder.persistent.dao.DeliveryOrderDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="deliveryOrderRecordDao"
+		class="me.ele.talaris.deliveryorder.persistent.dao.DeliveryOrderRecordDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="eleOrderDetailDao" class="me.ele.talaris.dao.EleOrderDetailDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="operationDao" class="me.ele.talaris.dao.OperationDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="restaurantDao" class="me.ele.talaris.dao.RestaurantDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="restaurantBindRecordDao" class="me.ele.talaris.dao.RestaurantBindRecordDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="roleDao" class="me.ele.talaris.dao.RoleDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="stationDao" class="me.ele.talaris.dao.StationDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="stationRestaurantDao" class="me.ele.talaris.dao.StationRestaurantDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="statisticFunctionLogDao" class="me.ele.talaris.dao.StatisticFunctionLogDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="systemParameterDao" class="me.ele.talaris.dao.SystemParameterDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="userDao" class="me.ele.talaris.dao.UserDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="userDeviceDao" class="me.ele.talaris.dao.UserDeviceDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="userStationRoleDao" class="me.ele.talaris.dao.UserStationRoleDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="deliveryOrderStatisticDao" class="me.ele.talaris.dao.DeliveryOrderStatisticDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="interfaceLogDao" class="me.ele.talaris.dao.InterfaceLogDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="retailerDelivererMappingDao"
+		class="me.ele.talaris.service.station.persistence.dao.RetailerDelivererMappingDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="userSubjectBillDao" class="me.ele.talaris.dao.UserSubjectBillDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="BankSerialMappingDao" class="me.ele.talaris.dao.BankSerialMappingDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="UserBankInfoDao" class="me.ele.talaris.dao.UserBankInfoDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="UserBankBindAbnormalDao" class="me.ele.talaris.dao.UserBankBindAbnormalDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="AdminModifyRecordDao" class="me.ele.talaris.dao.AdminModifyRecordDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="FrontedAppCssDirectoryDao"
+		class="me.ele.talaris.base.persistent.dao.hotupdate.FrontedAppCssDirectoryDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="FrontedAppJsDirectoryDao"
+		class="me.ele.talaris.base.persistent.dao.hotupdate.FrontedAppJsDirectoryDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="FrontedAppHtmlDirectoryDao"
+		class="me.ele.talaris.base.persistent.dao.hotupdate.FrontedAppHtmlDirectoryDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="allowanceDao" class="me.ele.talaris.dao.AllowanceDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<!-- redis连接池的配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.pool.maxIdle}" />
+		<property name="minIdle" value="${redis.pool.minIdle}" />
+
+		<property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}" />
+		<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+		<property name="testOnReturn" value="${redis.pool.testOnReturn}" />
+	</bean>
+	<!-- redis的连接池pool，不是必选项：timeout/password -->
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1" value="${redis.host}" />
+		<constructor-arg index="2" value="${redis.port}" />
+		<constructor-arg index="3" value="${redis.timeout}"
+			type="int" />
+	</bean>
+	<bean id="redisClient" class="me.ele.talaris.redis.RedisClient">
+		<property name="jedisPool" ref="jedisPool"></property>
+	</bean>
+
+	<bean id="licenceDao" class="me.ele.talaris.dao.LicenceDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="userLicenceDao" class="me.ele.talaris.dao.UserLicenceDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="settlementDao" class="me.ele.talaris.dao.SettlementDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="settlementDeliveryOrderDao" class="me.ele.talaris.dao.SettlementDeliveryOrderDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="userDeleteLogDao" class="me.ele.talaris.dao.UserDeleteLogDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="announcementDao" class="me.ele.talaris.dao.AnnouncementDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="announcementReadDao" class="me.ele.talaris.dao.AnnouncementReadDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="webapi_security" class="me.ele.talaris.web.framework.WebAPISecurityFilter">
+
+
+	</bean>
+
+	<bean id="deliveryOrderComponent"
+		class="me.ele.talaris.service.deliveryorder.impl.DeliveryOrderComponent">
+		<property name="callTaskInfoDao" ref="callTaskInfoDao"></property>
+		<property name="deliveryOrderDao" ref="deliveryOrderDao"></property>
+		<property name="deliveryOrderRecordDao" ref="deliveryOrderRecordDao"></property>
+		<property name="eleOrderDetailDao" ref="eleOrderDetailDao"></property>
+		<property name="settlementComponent" ref="settlementComponent"></property>
+		<property name="talarisNaposService" ref="talarisNaposService"></property>
+		<property name="userStationRoleDao" ref="userStationRoleDao"></property>
+		<property name="redisClient" ref="redisClient"></property>
+		<property name="restaurantDao" ref="restaurantDao"></property>
+		<!--拉单的时间控制 -->
+		<property name="expiredHours" value="3"></property>
+		<!-- 自动标记异常的时间控制 -->
+		<property name="markConfirmDeliveried" value="3"></property>
+		<property name="bookedOrderDisplayTime" value="1.5"></property>
+	</bean>
+	<bean id="settlementComponent"
+		class="me.ele.talaris.service.settlement.impl.SettlementComponent">
+		<property name="deliveryOrderComponent" ref="deliveryOrderComponent"></property>
+		<property name="deliveryOrderDao" ref="deliveryOrderDao"></property>
+		<property name="expiredHours" value="4"></property>
+		<property name="permitionValidateService" ref="permissionService"></property>
+		<property name="settlementDao" ref="settlementDao"></property>
+		<property name="settlementDeliveryOrderDao" ref="settlementDeliveryOrderDao"></property>
+		<property name="statisticsService" ref="statisticsService"></property>
+		<property name="userDao" ref="userDao"></property>
+		<property name="userDeviceService" ref="userDeviceService"></property>
+		<property name="userStationRoleDao" ref="userStationRoleDao"></property>
+		<property name="userStationRoleService" ref="userStationRoleService"></property>
+		<property name="stationRestaurantDao" ref="stationRestaurantDao"></property>
+		<property name="restaurantDao" ref="restaurantDao"></property>
+		<property name="commonDeliveryOrderService" ref="commonDeliveryOrderService"></property>
+	</bean>
+	<bean id="restaurantIdsModuleDao" class="me.ele.talaris.dao.RestaurantIdsModuleDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="cacheLockInterceptor" class="me.ele.talaris.redis.CacheLockInterceptor">
+		<property name="jedisPool" ref="jedisPool"></property>
+	</bean>
+	<bean
+
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="interceptorNames">
+			<list>
+				<value>cacheLockInterceptor</value>
+			</list>
+		</property>
+		<property name="beanNames">
+			<list>
+				<value>markExceptionService</value>
+				<value>cancelDeliveryOrderService</value>
+				<value>getDeliveryOrderService</value>
+				<value>idGenerator</value>
+				<value>createDeliveryOrderService</value>
+				<value>markExceptionService</value>
+			</list>
+		</property>
+		<property name="proxyTargetClass" value="true"></property>
+	</bean>
+
+</beans>

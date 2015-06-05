@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>me.ele</groupId>
+		<artifactId>talaris-impl</artifactId>
+		<version>1.0.6-SNAPSHOT</version>
+	</parent>
+	<artifactId>talaris-napos-impl</artifactId>
+	<name>talaris-napos-impl</name>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-napos-channel</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-hermes</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-base-model-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-hermes-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-session-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>talaris-crowd-retailer-impl</artifactId>
+			<version>${talaris.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.handlers</resource>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.schemas</resource>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>me.ele.talaris.main.Main</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

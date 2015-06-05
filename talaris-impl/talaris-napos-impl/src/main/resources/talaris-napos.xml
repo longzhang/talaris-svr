@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/tx 
+            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<bean id="talarisNaposService" class="me.ele.talaris.napos.service.impl.TalarisNaposService">
+		<property name="naposServiceWrapper" ref="naposServiceWrapper"></property>
+	</bean>
+
+	<bean id="naposServiceWrapper" class="me.ele.talaris.napos.wrapper.NaposServiceWrapper">
+		<property name="eleOrderDetailDao" ref="eleOrderDetailDao"></property>
+		<property name="cityDao" ref="cityDao"></property>
+		<property name="stationDao" ref="stationDao"></property>
+		<property name="restaurantBindRecordDao" ref="restaurantBindRecordDao"></property>
+		<property name="getrestaurantbymobileurl" value="${napos.getrestaurantbymobileurl}"></property>
+		<property name="geteleorderbyidurl" value="${napos.geteleorderbyidurl}"></property>
+	  	<property name="getrestaurantbyidurl" value="${napos.getrestaurantbyidurl}"></property>
+	  	<property name="geteleordersbyridurl" value="${napos.geteleordersbyridurl}"></property>
+	  	<property name="posteleorderstatusurl" value="${napos.posteleorderstatusurl}"></property>
+	  
+		
+	</bean>
+	<bean id="eleOrderDetailDao" class="me.ele.talaris.dao.EleOrderDetailDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="cityDao" class="me.ele.talaris.dao.CityDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="stationDao" class="me.ele.talaris.dao.StationDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	<bean id="restaurantBindRecordDao" class="me.ele.talaris.dao.RestaurantBindRecordDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+</beans>

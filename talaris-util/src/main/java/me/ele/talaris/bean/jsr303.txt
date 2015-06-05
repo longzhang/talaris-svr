@@ -1,0 +1,53 @@
+详细注解参见 http://beanvalidation.org/1.0/spec/
+
+JSR-303 是JAVA EE 6 中的一项子规范，叫做Bean Validation，官方参考实现是Hibernate Validator。 
+此实现与Hibernate ORM 没有任何关系。JSR 303 用于对Java Bean 中的字段的值进行验证。 
+
+Spring MVC 3.x之中也大力支持 JSR-303，可以在控制器中对表单提交的数据方便地验证。 
+
+JSR 303内置的约束规则： 
+
+@AssertTrue / @AssertFalse 
+验证适用字段：boolean
+注解说明：验证值是否为true / false
+属性说明：-
+
+@DecimalMax / @DecimalMin 
+验证适用字段：BigDecimal,BigInteger,String,byte,short,int,long
+注解说明：验证值是否小于或者等于指定的小数值，要注意小数存在精度问题
+属性说明：公共
+
+@Digits 
+验证适用字段：BigDecimal,BigInteger,String,byte,short,int,long
+注解说明：验证值的数字构成是否合法
+属性说明：integer:指定整数部分的数字的位数。fraction: 指定小数部分的数字的位数。
+
+@Future / @Past 
+验证适用字段：Date,Calendar
+注解说明：验证值是否在当前时间之后 / 之前
+属性说明：公共
+
+@Max / @Min 
+验证适用字段：BigDecimal,BigInteger,String,byte,short,int,long
+注解说明：验证值是否小于或者等于指定的整数值
+属性说明：公共
+
+@NotNull / @Null 
+验证适用字段：引用数据类型
+注解说明：验证值是否为非空 / 空
+属性说明：公共
+
+@Pattern 
+验证适用字段：String
+注解说明：验证值是否配备正则表达式
+属性说明：regexp:正则表达式flags: 指定Pattern.Flag 的数组，表示正则表达式的相关选项。
+
+@Size 
+验证适用字段：String,Collection,Map,数组
+注解说明：验证值是否满足长度要求
+属性说明：max:指定最大长度，min:指定最小长度。
+
+@Valid 
+验证适用字段：引用类型
+注解说明：验证值是否需要递归验证
+属性说明：无
